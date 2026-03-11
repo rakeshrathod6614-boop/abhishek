@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Card Generator</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #f6d365, #fda085);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 50px;
+        min-height: 100vh;
+      }
+
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        width: 300px;
+        text-align: center;
+        margin-right: 30px;
+      }
+
+      input {
+        width: 90%;
+        padding: 8px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 6px;
+        background: #4e73df;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #2e59d9;
+      }
+
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        max-width: 900px;
+      }
+
+      .student-card {
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        width: 200px;
+        text-align: center;
+        transition: transform 0.3s;
+      }
+
+      .student-card:hover {
+        transform: scale(1.05);
+      }
+
+      .student-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+
+      .student-card h3 {
+        margin: 5px 0;
+        color: #333;
+      }
+
+      .student-card p {
+        margin: 2px 0;
+        font-size: 14px;
+        color: #555;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Student Card Generator</h2>
+      <input type="text" id="name" placeholder="Enter Name" />
+      <input type="number" id="age" placeholder="Enter Age" />
+      <input type="text" id="class" placeholder="Enter Class" />
+      <input type="text" id="image" placeholder="Enter Image URL" />
+      <button onclick="generateCard()">Generate Card</button>
+    </div>
+
+    <div class="cards" id="cardsContainer">
+      <!-- Student cards will appear here -->
+    </div>
+
+    <script>
+      function generateCard() {
+        const name = document.getElementById("name").value;
+        const age = document.getElementById("age").value;
+        const studentClass = document.getElementById("class").value;
+        const image =
+          document.getElementById("image").value ||
+          "https://via.placeholder.com/100";
+
+        if (!name || !age || !studentClass) {
+          alert("Please fill all the required fields!");
+          return;
+        }
+
+        const card = document.createElement("div");
+        card.className = "student-card";
+
+        card.innerHTML = `
+        <img src="${image}" alt="Student Image">
+        <h3>${name}</h3>
+        <p>Age: ${age}</p>
+        <p>Class: ${studentClass}</p>
+    `;
+
+        document.getElementById("cardsContainer").appendChild(card);
+
+        // Clear input fields after generating
+        document.getElementById("name").value = "";
+        document.getElementById("age").value = "";
+        document.getElementById("class").value = "";
+        document.getElementById("image").value = "";
+      }
+    </script>
+  </body>
+</html>
